@@ -26,6 +26,17 @@ export const UserService = {
           name: clerkUser.fullName || clerkUser.firstName || null,
         },
       });
+
+      // Create a default "Personal" lead for the new user
+      await prisma.lead.create({
+        data: {
+          userId: user.id,
+          name: "Personal",
+          attributes: {
+            description: "Default lead for personal tasks and reminders",
+          },
+        },
+      });
     }
 
     return user;
