@@ -69,4 +69,20 @@ export const TaskService = {
       orderBy: { deadline: "asc" },
     });
   },
+
+  async update(id: string, data: { title?: string; deadline?: Date; status?: TaskStatus }) {
+    return prisma.task.update({
+      where: { id },
+      data: {
+        ...data,
+        completedAt: data.status === "completed" ? new Date() : data.status ? null : undefined,
+      },
+    });
+  },
+
+  async delete(id: string) {
+    return prisma.task.delete({
+      where: { id },
+    });
+  },
 };

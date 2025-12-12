@@ -48,4 +48,17 @@ export const LeadService = {
       },
     });
   },
+
+  async update(id: string, userId: string, data: { name?: string; attributes?: Record<string, unknown> }) {
+    return prisma.lead.update({
+      where: { id, userId },
+      data,
+    });
+  },
+
+  async delete(id: string, userId: string) {
+    return prisma.lead.delete({
+      where: { id, userId },
+    });
+  },
 };

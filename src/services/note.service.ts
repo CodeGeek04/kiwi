@@ -20,4 +20,17 @@ export const NoteService = {
       orderBy: { createdAt: "desc" },
     });
   },
+
+  async update(id: string, content: string) {
+    return prisma.note.update({
+      where: { id },
+      data: { content },
+    });
+  },
+
+  async delete(id: string) {
+    return prisma.note.delete({
+      where: { id },
+    });
+  },
 };
