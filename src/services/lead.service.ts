@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/db";
 import type { CreateLeadInput } from "@/types";
+import type { Prisma } from "@prisma/client";
 
 export const LeadService = {
   async create(data: CreateLeadInput) {
@@ -49,7 +50,7 @@ export const LeadService = {
     });
   },
 
-  async update(id: string, userId: string, data: { name?: string; attributes?: Record<string, unknown> }) {
+  async update(id: string, userId: string, data: { name?: string; attributes?: Prisma.InputJsonValue }) {
     return prisma.lead.update({
       where: { id, userId },
       data,
